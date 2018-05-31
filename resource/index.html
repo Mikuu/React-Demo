@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Webox</title>
+</head>
+
+<style type="text/css">
+    div.styleItem {float:left;margin-right: 5px;}
+    input.styleSelect {float:left;margin-right: 15px;}
+    select.styleSelect {float:left;margin-right: 15px;}
+</style>
+
+<script language="JavaScript">
+    function setColor(color) {
+        document.getElementById("color-block").style.backgroundColor = color;
+    }
+
+    function setWidth(width) {
+        document.getElementById("color-block").style.width = width;
+    }
+
+    function setHeight(height) {
+        document.getElementById("color-block").style.height = height;
+    }
+</script>
+
+<body>
+    <div>
+        <div>
+            <div>
+                <div class="styleItem">Background Color</div>
+                <select class="styleSelect" onchange="setColor(this.value)">
+                    <option value="red">Red</option>
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                </select>
+                <div class="styleItem">or</div>
+                <input class="styleSelect" type="color" onchange="setColor(this.value)">
+            </div>
+
+            <div>
+                <div class="styleItem">Width</div>
+                <select class="styleSelect" onchange="setWidth(this.value)">
+                    <option value="100px">100 px</option>
+                    <option value="200px">200 px</option>
+                    <option value="300px">300 px</option>
+                </select>
+            </div>
+
+            <div>
+                <div class="styleItem">Height</div>
+                <select class="styleSelect" onchange="setHeight(this.value)">
+                    <option value="100px">100 px</option>
+                    <option value="200px">200 px</option>
+                    <option value="300px">300 px</option>
+                </select>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+
+        <table style="margin: 20px">
+            <tr>
+                <td>
+                    <div id="color-block" style="background-color: red;width: 50px;height: 50px"></div>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+</body>
+</html>
