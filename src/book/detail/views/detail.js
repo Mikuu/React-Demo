@@ -1,19 +1,19 @@
 import React from 'react';
 import Img from 'react-image';
 
-const DetailComponent = (props) => {
+const BookDetail = ({match}) => {
   const styleDetail = {
     margin: '20px'
-  }
+  };
 
   return (
       <div style={styleDetail}>
-        <div><Img src={props.image}></div>
-        <div><h3>Title: {props.title}</h3></div>
-        <div><h3>Price: {props.price}</h3></div>
-        <div></div>
+          {/*<Img src={props.image}/>*/}
+          {/*<h3>Title: {props.title}</h3>*/}
+          {/*<p>Price: {props.price}</p>*/}
+          {match.params.bookId}
       </div>
   );
 };
 
-export default DetailComponent;
+export default BookDetail;

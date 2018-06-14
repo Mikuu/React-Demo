@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const ItemComponent = (props) => {
   const styleItem = {
@@ -14,9 +15,11 @@ const ItemComponent = (props) => {
 
   return (
       <div style={styleItem}>
-          <img src={props.image} width={'220px'} height={'300px'}/>
-          <p>{props.title}</p>
-          <p>{props.price}</p>
+          <Link to='/detail/aBook'>
+              <img src={props.image} width={'220px'} height={'300px'}/>
+              <p>{props.title}</p>
+              <p>{props.price}</p>
+          </Link>
       </div>
   );
 };

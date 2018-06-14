@@ -7,52 +7,38 @@ class BookList extends React.Component {
         super(props);
 
         this.onChangeCount = this.onChangeCount.bind(this);
-        this.onSubmitSearch = this.onSubmitSearch.bind(this);
-        this.getBooks = this.getBooks.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this._getBooks = this._getBooks.bind(this);
 
         this.state = {books: [], count: 1};
     }
 
-    componentDidMount() {
-        console.log("FBI --> +DidMount Count: "+this.state.count);
-        this.getBooks();
-        console.log("FBI --> -DidMount Count: "+this.state.count);
-    }
-
-    getBooks() {
+    _getBooks() {
         const apiUrl = 'v2/book/search?q=react&count='+this.state.count;
-        console.log("FBI --> Get Books: apiUrl "+apiUrl);
-
-
         fetch(apiUrl).then((response) => {
             if (response.status !== 200) {
                 throw new Error('Fail to get response with status ' + response.status);
             }
-
-            console.log("FBI --> Get Books: response "+response.status);
-
             response.json().then((responseJson) => {
-                this.setState({books: responseJson.books}, () => {
-                    console.log("FBI --> Get Books: "+this.state.count+" "+this.state.books);
-                });
+                this.setState({books: responseJson.books});
             }).catch((error) => {
                 this.setState({books: []});
             });
         }).catch((error) => {
-            console.log("FBI --> Get Books: error "+error.toString());
-
             this.setState({books: []});
         });
+    }
+
+    componentDidMount() {
+        this._getBooks();
     }
 
     onChangeCount(e) {
         this.setState({count: e.target.value});
     }
 
-    onSubmitSearch() {
-        console.log("FBI --> -onSubmitSearchCount "+this.state.count);
-        this.getBooks();
-        console.log("FBI --> +onSubmitSearchCount "+this.state.count);
+    onSubmit() {
+        this._getBooks();
     }
 
     render() {
@@ -73,17 +59,15 @@ class BookList extends React.Component {
 
         return (
             <div>
-                <form onSubmit={this.onSubmitSearch}>
-                    <label>
-                        Count:
-                        <input type="text" onChange={this.onChangeCount} />
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>
+                <label>
+                    Count:
+                    <input type="number" min={"1"} max={"10"} onChange={this.onChangeCount} />
+                </label>
+                <input type="submit" value="Submit" onClick={this.onSubmit}/>
                 <ul style={styleList}>{bookList}</ul>
             </div>
 
-    )
+        )
     }
 }
 
