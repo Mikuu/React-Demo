@@ -1,3 +1,3 @@
-import BookDetail from './views/detail.js'
+import BookDetailComponent from './views/detail.js'
 
-export default BookDetail;
+export default BookDetailComponent;

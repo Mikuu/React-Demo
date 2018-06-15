@@ -53,7 +53,7 @@ class BookList extends React.Component {
 
         const bookList = this.state.books.map((book) =>
             <li key={book.id}>
-                <ItemComponent image={book.image} title={book.title} price={book.price} />
+                <ItemComponent image={book.image} title={book.title} price={book.price} id={book.id} />
             </li>
         );
 

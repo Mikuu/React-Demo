@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 const ItemComponent = (props) => {
+
   const styleItem = {
       margin: '20px',
       padding: '10px',
@@ -13,9 +14,11 @@ const ItemComponent = (props) => {
       borderStyle: 'solid'
   };
 
+  const urlBookDetail = '/detail/'+props.id;
+
   return (
       <div style={styleItem}>
-          <Link to='/detail/aBook'>
+          <Link to={urlBookDetail}>
               <img src={props.image} width={'220px'} height={'300px'}/>
               <p>{props.title}</p>
               <p>{props.price}</p>
