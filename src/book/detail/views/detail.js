@@ -1,21 +1,4 @@
 import React from 'react';
-import Img from 'react-image';
-
-const BookDetail = ({match}) => {
-  const styleDetail = {
-    margin: '20px'
-  };
-
-  return (
-      <div style={styleDetail}>
-          {/*<Img src={props.image}/>*/}
-          {/*<h3>Title: {props.title}</h3>*/}
-          {/*<p>Price: {props.price}</p>*/}
-          {match.params.bookId}
-      </div>
-  );
-};
-
 
 class BookDetailComponent extends React.Component {
     constructor(props) {
@@ -49,9 +32,19 @@ class BookDetailComponent extends React.Component {
     }
 
     render() {
-        const styleDetail = {
-            margin: '20px'
+        const styleDetailContainer = {
+            maxWidth: '800px',
+            margin: '0 auto',
         };
+
+        const styleDetailImage = {
+            width: '250px',
+            height: '1200px',
+            float: 'left',
+        };
+        const styleDetailInformation = {
+            marginLeft: '20px',
+    };
 
         if (this.state.book == null) {
             return (
@@ -62,28 +55,35 @@ class BookDetailComponent extends React.Component {
         }
 
         return (
-            <div style={styleDetail}>
-                <img src={this.state.book.image} width={'220px'} height={'300px'}/>
-                <div>
-                    <b>Title: </b>
-                    <span>{this.state.book.title}</span>
+            <div style={styleDetailContainer}>
+                <div style={styleDetailImage}>
+                    <img src={this.state.book.image} width={'220px'} height={'300px'}/>
                 </div>
-                <div>
-                    <b>Price: </b>
-                    <span>{this.state.book.price}</span>
+
+                <div style={styleDetailInformation}>
+                    <div>
+                        <b>Title: </b>
+                        <span>{this.state.book.title}</span>
+                    </div>
+                    <div>
+                        <b>Price: </b>
+                        <span>{this.state.book.price}</span>
+                    </div>
+                    <div>
+                        <b>Publisher: </b>
+                        <span>{this.state.book.publisher}</span>
+                    </div>
+                    <div>
+                        <b>Author: </b>
+                        <span>{this.state.book.author}</span>
+                    </div>
+                    <div>
+                        <b>Summary: </b>
+                        <span>{this.state.book.summary}</span>
+                    </div>
                 </div>
-                <div>
-                    <b>Publisher: </b>
-                    <span>{this.state.book.publisher}</span>
-                </div>
-                <div>
-                    <b>Author: </b>
-                    <span>{this.state.book.author}</span>
-                </div>
-                <div>
-                    <b>Summary: </b>
-                    <span>{this.state.book.summary}</span>
-                </div>
+
+
 
             </div>
         );
