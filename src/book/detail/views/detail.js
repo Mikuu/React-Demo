@@ -35,6 +35,7 @@ class BookDetailComponent extends React.Component {
         const styleDetailContainer = {
             maxWidth: '800px',
             margin: '0 auto',
+            marginTop: '50px',
         };
 
         const styleDetailImage = {

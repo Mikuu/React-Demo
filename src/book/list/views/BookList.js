@@ -46,8 +46,18 @@ class BookList extends React.Component {
             return <div>T_T</div>;
         }
 
+        const styleContainer = {
+            maxWidth: '800px',
+            margin: '0 auto',
+        }
+
+        const styleInput = {
+            width: '200px',
+            float: 'left',
+        }
+
         const styleList = {
-            margin: '35px',
+            marginLeft: '100px',
             listStyleType: 'none',
         };
 
@@ -58,12 +68,14 @@ class BookList extends React.Component {
         );
 
         return (
-            <div>
-                <label>
-                    Count:
-                    <input type="number" min={"1"} max={"10"} onChange={this.onChangeCount} />
-                </label>
-                <input type="submit" value="Submit" onClick={this.onSubmit}/>
+            <div style={styleContainer}>
+                <div style={styleInput}>
+                    <label>
+                        Count:
+                        <input type="number" min={"1"} max={"10"} onChange={this.onChangeCount} />
+                    </label>
+                    <input type="submit" value="Search" onClick={this.onSubmit}/>
+                </div>
                 <ul style={styleList}>{bookList}</ul>
             </div>
 
