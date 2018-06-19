@@ -1,6 +1,10 @@
 import React from 'react';
 import ItemComponent from './Item.js';
 
+const storageItem = {
+    count: 'reactDemoBookListCount',
+};
+
 class BookList extends React.Component {
 
     constructor(props) {
@@ -10,7 +14,8 @@ class BookList extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
         this._getBooks = this._getBooks.bind(this);
 
-        this.state = {books: [], count: 1};
+        let _count = localStorage.getItem(storageItem.count);
+        this.state = {books: [], count: _count?_count:1};
     }
 
     _getBooks() {
@@ -21,9 +26,12 @@ class BookList extends React.Component {
             }
             response.json().then((responseJson) => {
                 this.setState({books: responseJson.books});
+                localStorage.setItem(storageItem.count, this.state.count.toString());
+
             }).catch((error) => {
                 this.setState({books: []});
             });
+
         }).catch((error) => {
             this.setState({books: []});
         });
