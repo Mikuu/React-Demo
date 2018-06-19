@@ -2,7 +2,12 @@
   "name": "react-demo",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://api.douban.com/",
+  "proxy": {
+    "/v2/book":{
+      "target":"https://api.douban.com/",
+      "changeOrigin":true
+    }
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.4.0",

@@ -3,6 +3,7 @@ import ItemComponent from './Item.js';
 
 const storageItem = {
     count: 'reactDemoBookListCount',
+    bookName: 'reactDemoBookListBookName',
 };
 
 class BookList extends React.Component {
@@ -10,16 +11,18 @@ class BookList extends React.Component {
     constructor(props) {
         super(props);
 
+        this.onChangeBookName = this.onChangeBookName.bind(this);
         this.onChangeCount = this.onChangeCount.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this._getBooks = this._getBooks.bind(this);
 
         let _count = localStorage.getItem(storageItem.count);
-        this.state = {books: [], count: _count?_count:1};
+        let _bookName = localStorage.getItem(storageItem.bookName);
+        this.state = {books: [], bookName: _bookName? _bookName:'react', count: _count?_count:1};
     }
 
     _getBooks() {
-        const apiUrl = 'v2/book/search?q=react&count='+this.state.count;
+        const apiUrl = 'v2/book/search?q='+this.state.bookName+'&count='+this.state.count;
         fetch(apiUrl).then((response) => {
             if (response.status !== 200) {
                 throw new Error('Fail to get response with status ' + response.status);
@@ -27,6 +30,7 @@ class BookList extends React.Component {
             response.json().then((responseJson) => {
                 this.setState({books: responseJson.books});
                 localStorage.setItem(storageItem.count, this.state.count.toString());
+                localStorage.setItem(storageItem.bookName, this.state.bookName.toString());
 
             }).catch((error) => {
                 this.setState({books: []});
@@ -39,6 +43,10 @@ class BookList extends React.Component {
 
     componentDidMount() {
         this._getBooks();
+    }
+
+    onChangeBookName(e) {
+        this.setState({bookName: e.target.value});
     }
 
     onChangeCount(e) {
@@ -57,15 +65,19 @@ class BookList extends React.Component {
         const styleContainer = {
             maxWidth: '800px',
             margin: '0 auto',
-        }
+        };
 
         const styleInput = {
-            width: '200px',
+            width: '400px',
             float: 'left',
+        };
+
+        const styleInputItem = {
+            margin: '5px',
         }
 
         const styleList = {
-            marginLeft: '100px',
+            marginLeft: '250px',
             listStyleType: 'none',
         };
 
@@ -78,10 +90,17 @@ class BookList extends React.Component {
         return (
             <div style={styleContainer}>
                 <div style={styleInput}>
-                    <label>
-                        Count:
-                        <input type="number" min={"1"} max={"10"} onChange={this.onChangeCount} />
-                    </label>
+                    <div style={styleInputItem}>
+                        <label>
+                            Book Name: <input type="text" defaultValue={this.state.bookName} onChange={this.onChangeBookName} />
+                        </label>
+                    </div>
+                    <div style={styleInputItem}>
+                        <label>
+                            Count: <input type="number" min={"1"} max={"10"} defaultValue={this.state.count} onChange={this.onChangeCount} />
+                        </label>
+                    </div>
+
                     <input type="submit" value="Search" onClick={this.onSubmit}/>
                 </div>
                 <ul style={styleList}>{bookList}</ul>

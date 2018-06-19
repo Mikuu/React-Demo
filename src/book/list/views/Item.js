@@ -14,12 +14,13 @@ const ItemComponent = (props) => {
       borderStyle: 'solid'
   };
 
+  // const urlBookDetail = hackImageUrl('/detail/'+props.id);
   const urlBookDetail = '/detail/'+props.id;
 
   return (
       <div style={styleItem}>
           <Link to={urlBookDetail}>
-              <img src={props.image} width={'220px'} height={'300px'}/>
+              <img src={props.image} width={'220px'} height={'300px'} />
               <p>{props.title}</p>
               <p>{props.price}</p>
           </Link>
