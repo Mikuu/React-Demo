@@ -20,3 +20,10 @@ export const updateBooks = (books) => {
     books: books
   };
 };
+
+export const updateBook = (book) => {
+  return {
+    type: ActionTypes.UPDATEBOOK,
+    book: book
+  };
+};

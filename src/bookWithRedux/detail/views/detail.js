@@ -1,34 +1,15 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import * as Action from '../../reduxComponents/Actions';
 
 class BookDetailComponent extends React.Component {
     constructor(props) {
-        console.log('FBI --> constructor');
-
         super(props);
-        this._getBook = this._getBook.bind(this);
-
-        this.state = {book:null};
+        this.props = props;
     }
 
     componentDidMount() {
-        this._getBook();
-        console.log('FBI --> didMount: '+this.state.book);
-    }
-
-    _getBook() {
-        const apiUrl = 'http://localhost:3000/v2/book/'+this.props.match.params.bookId;
-        fetch(apiUrl).then((response) => {
-            if (response.status !== 200) {
-                throw new Error('Fail to get response with status ' + response.status);
-            }
-            response.json().then((responseJson) => {
-                this.setState({book: responseJson});
-            }).catch((error) => {
-                throw new Error('Failed to get response, reason: '+error.toString());
-            });
-        }).catch((error) => {
-            throw new Error('Failed to fetch request, reason: '+error.toString());
-        });
+        this.props.getBook();
     }
 
     render() {
@@ -45,9 +26,9 @@ class BookDetailComponent extends React.Component {
         };
         const styleDetailInformation = {
             marginLeft: '20px',
-    };
+        };
 
-        if (this.state.book == null) {
+        if (this.props.book == null) {
             return (
                 <div>
                     <p>loading ...</p>
@@ -58,38 +39,61 @@ class BookDetailComponent extends React.Component {
         return (
             <div style={styleDetailContainer}>
                 <div style={styleDetailImage}>
-                    <img src={this.state.book.image} width={'220px'} height={'300px'}/>
+                    <img src={this.props.book.image} width={'220px'} height={'300px'}/>
                 </div>
 
                 <div style={styleDetailInformation}>
                     <div>
                         <b>Title: </b>
-                        <span>{this.state.book.title}</span>
+                        <span>{this.props.book.title}</span>
                     </div>
                     <div>
                         <b>Price: </b>
-                        <span>{this.state.book.price}</span>
+                        <span>{this.props.book.price}</span>
                     </div>
                     <div>
                         <b>Publisher: </b>
-                        <span>{this.state.book.publisher}</span>
+                        <span>{this.props.book.publisher}</span>
                     </div>
                     <div>
                         <b>Author: </b>
-                        <span>{this.state.book.author}</span>
+                        <span>{this.props.book.author}</span>
                     </div>
                     <div>
                         <b>Summary: </b>
-                        <span>{this.state.book.summary}</span>
+                        <span>{this.props.book.summary}</span>
                     </div>
                 </div>
-
-
-
             </div>
         );
     }
 
 }
 
-export default BookDetailComponent;
+function mapStateToProps(state) {
+    return {
+        book: state.book
+    }
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        getBook: () => {
+            const apiUrl = 'http://localhost:3000/v2/book/' + ownProps.match.params.bookId;
+            fetch(apiUrl).then((response) => {
+                if (response.status !== 200) {
+                    throw new Error('Fail to get response with status ' + response.status);
+                }
+                response.json().then((responseJson) => {
+                    dispatch(Action.updateBook(responseJson));
+                }).catch((error) => {
+                    throw new Error('Failed to get response, reason: '+error.toString());
+                });
+            }).catch((error) => {
+                throw new Error('Failed to fetch request, reason: '+error.toString());
+            });
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookDetailComponent);
