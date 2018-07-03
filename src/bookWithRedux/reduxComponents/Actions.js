@@ -13,3 +13,10 @@ export const updateSearchName = (searchName) => {
     searchName: searchName
   };
 };
+
+export const updateBooks = (books) => {
+  return {
+    type: ActionTypes.UPDATEBOOKS,
+    books: books
+  };
+};

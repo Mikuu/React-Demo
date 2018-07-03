@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import * as Actions from '../../reduxComponents/Actions';
 import ItemComponent from './Item.js';
 
 const storageItem = {
@@ -6,7 +8,7 @@ const storageItem = {
     bookName: 'reactDemoBookListBookName',
 };
 
-class BookList extends React.Component {
+class BookListOri extends React.Component {
 
     constructor(props) {
         super(props);
@@ -110,4 +112,76 @@ class BookList extends React.Component {
     }
 }
 
-export default BookList;
+function BookList({searchName, searchCount, books, onChangeSearchName, onChangeSearchCount, onSubmit}) {
+    if (!books) {
+        return <div>T_T</div>;
+    }
+
+    const styleContainer = {
+        maxWidth: '800px',
+        margin: '0 auto',
+    };
+
+    const styleInput = {
+        width: '400px',
+        float: 'left',
+    };
+
+    const styleInputItem = {
+        margin: '5px',
+    };
+
+    const styleList = {
+        marginLeft: '250px',
+        listStyleType: 'none',
+    };
+
+    const bookList = books.map((book) =>
+        <li key={book.id}>
+            <ItemComponent image={book.image} title={book.title} price={book.price} id={book.id} />
+        </li>
+    );
+
+    return (
+        <div style={styleContainer}>
+            <div style={styleInput}>
+                <div style={styleInputItem}>
+                    <label>
+                        Book Name: <input type="text" defaultValue={searchName} onChange={onChangeSearchName} />
+                    </label>
+                </div>
+                <div style={styleInputItem}>
+                    <label>
+                        Count: <input type="number" min={"1"} max={"10"} defaultValue={searchCount} onChange={onChangeSearchCount} />
+                    </label>
+                </div>
+                <input type="submit" value="Search" onClick={onSubmit}/>
+            </div>
+            <ul style={styleList}>{bookList}</ul>
+        </div>
+    )
+}
+
+function mapStateToProps(state, ownProps) {
+    return {
+        books: state.books,
+        searchName: state.searchName,
+        searchCount: state.searchCount
+    }
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+    return {
+        onChangeSearchCount: () => {
+            dispatch(Actions.updateSearchCount(ownProps.searchCount));
+        },
+        onChangeSearchName: () => {
+            dispatch(Actions.updateSearchName(ownProps.searchName));
+        },
+        onSubmit: () => {
+            dispatch(Actions.updateBooks())
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookList);
