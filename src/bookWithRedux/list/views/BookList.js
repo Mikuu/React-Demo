@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as Actions from '../../reduxComponents/Actions';
-import store from '../../reduxComponents/Store';
 import ItemComponent from './Item.js';
 
 const storageItem = {
@@ -9,8 +8,8 @@ const storageItem = {
     bookName: 'reactDemoBookListBookName',
 };
 
-function BookList({searchName, searchCount, books, onChangeSearchName, onChangeSearchCount, onSubmit}) {
-    if (!books) {
+function BookList(props, context) {
+    if (!props.books) {
         return <div>T_T</div>;
     }
 
@@ -33,7 +32,7 @@ function BookList({searchName, searchCount, books, onChangeSearchName, onChangeS
         listStyleType: 'none',
     };
 
-    const bookList = books.map((book) =>
+    const bookList = props.books.map((book) =>
         <li key={book.id}>
             <ItemComponent image={book.image} title={book.title} price={book.price} id={book.id} />
         </li>
@@ -44,15 +43,15 @@ function BookList({searchName, searchCount, books, onChangeSearchName, onChangeS
             <div style={styleInput}>
                 <div style={styleInputItem}>
                     <label>
-                        Book Name: <input type="text" defaultValue={searchName} onChange={onChangeSearchName} />
+                        Book Name: <input type="text" defaultValue={props.searchName} onChange={props.onChangeSearchName} />
                     </label>
                 </div>
                 <div style={styleInputItem}>
                     <label>
-                        Count: <input type="number" min={"1"} max={"10"} defaultValue={searchCount} onChange={onChangeSearchCount} />
+                        Count: <input type="number" min={"1"} max={"10"} defaultValue={props.searchCount} onChange={props.onChangeSearchCount} />
                     </label>
                 </div>
-                <input type="submit" value="Search" onClick={onSubmit}/>
+                <input type="submit" value="Search" onClick={props.onSubmit}/>
             </div>
             <ul style={styleList}>{bookList}</ul>
         </div>
@@ -69,32 +68,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 
-    function getBooks(dispatch) {
-
-        const searchName = store.getState().searchName;
-        const searchCount = store.getState().searchCount;
-
-        const apiUrl = 'v2/book/search?q='+searchName+'&count='+searchCount;
-        fetch(apiUrl).then((response) => {
-            if (response.status !== 200) {
-                throw new Error('Fail to get response with status ' + response.status);
-            }
-            response.json().then((responseJson) => {
-                dispatch(Actions.updateBooks(responseJson.books));
-
-                // localStorage.setItem(storageItem.count, this.state.count.toString());
-                // localStorage.setItem(storageItem.bookName, this.state.bookName.toString());
-
-            }).catch((error) => {
-                console.log('FBI --> Error Response: ' + error.toString());
-                throw new Error('Fail to get response with status ' + response.status);
-            });
-
-        }).catch((error) => {
-            console.log('FBI --> Error: ' + error.toString());
-        });
-    }
-
     return {
         onChangeSearchCount: (e) => {
             dispatch(Actions.updateSearchCount(e.target.value));
@@ -103,8 +76,7 @@ function mapDispatchToProps(dispatch) {
             dispatch(Actions.updateSearchName(e.target.value));
         },
         onSubmit: () => {
-            getBooks(dispatch);
-            // dispatch(Actions.updateBooks(books));
+            dispatch(Actions.fetchBooks());
         }
     }
 }

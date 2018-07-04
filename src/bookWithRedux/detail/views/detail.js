@@ -71,28 +71,12 @@ class BookDetailComponent extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return {
-        book: state.book
-    }
+    return {book: state.book}
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        getBook: () => {
-            const apiUrl = 'http://localhost:3000/v2/book/' + ownProps.match.params.bookId;
-            fetch(apiUrl).then((response) => {
-                if (response.status !== 200) {
-                    throw new Error('Fail to get response with status ' + response.status);
-                }
-                response.json().then((responseJson) => {
-                    dispatch(Action.updateBook(responseJson));
-                }).catch((error) => {
-                    throw new Error('Failed to get response, reason: '+error.toString());
-                });
-            }).catch((error) => {
-                throw new Error('Failed to fetch request, reason: '+error.toString());
-            });
-        }
+        getBook: () => {dispatch(Action.fetchBook(ownProps));}
     }
 }
 
