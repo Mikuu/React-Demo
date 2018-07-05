@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as Action from '../../reduxComponents/Actions';
+import { withRouter } from 'react-router-dom'
 
 class BookDetailComponent extends React.Component {
     constructor(props) {
@@ -80,4 +81,4 @@ function mapDispatchToProps(dispatch, ownProps) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookDetailComponent);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BookDetailComponent));

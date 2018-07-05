@@ -30,7 +30,7 @@ export const updateBook = (book) => {
 
 export const fetchBooks = () => {
     return function (dispatch, getState) {
-        const apiUrl = 'v2/book/search?q=' + getState().searchName + '&count=' +getState().searchCount;
+        const apiUrl = '/v2/book/search?q=' + getState().searchName + '&count=' +getState().searchCount;
         fetch(apiUrl).then(
             response => {
                 if (response.status !== 200) {
@@ -50,7 +50,7 @@ export const fetchBooks = () => {
 
 export const fetchBook = (ownProps) => {
     return function (dispatch) {
-        const apiUrl = 'http://localhost:3000/v2/book/' + ownProps.match.params.bookId;
+        const apiUrl = '/v2/book/' + ownProps.match.params.bookId;
         fetch(apiUrl).then(
             response => {
                 if (response.status !== 200) {throw new Error("FBI --> Error: failed to get response with status 200");}
@@ -62,4 +62,12 @@ export const fetchBook = (ownProps) => {
             error => {throw error;}
         )
     }
+};
+
+export const shoppingCartAddBook = (book) => {
+    return {
+        type: ActionTypes.SHOPPINGCARTADDBOOK,
+        bookCount: 1,
+        bookPrice: parseFloat(book.price.match(/(\d|\.)+/)[0])
+    };
 };

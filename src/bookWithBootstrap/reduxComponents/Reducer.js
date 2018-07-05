@@ -11,6 +11,11 @@ export default (state, action) => {
           return {...state, ['books']: action.books};
       case ActionTypes.UPDATEBOOK:
           return {...state, ['book']: action.book};
+      case ActionTypes.SHOPPINGCARTADDBOOK:
+          let newState = {...state};
+          newState.shoppingCart.totalCount += action.bookCount;
+          newState.shoppingCart.totalPrice += action.bookPrice;
+          return newState;
       default:
           return state
   }

@@ -1,5 +1,8 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
+import icons from '../../assets';
+import * as Actions from "../../reduxComponents/Actions";
+import {connect} from "react-redux";
 
 const ItemComponent = (props) => {
 
@@ -17,10 +20,25 @@ const ItemComponent = (props) => {
             </div>
             <div className="card-footer">
                 <span className="badge badge-info">{props.price}</span>
-
+                <a href="#" onClick={props.onOrderBook}>
+                    <img className="float-right" src={icons.shoppingCartItem} style={{width:'20px', height:'20px', marginTop: '2.5px'}}/>
+                </a>
             </div>
         </div>
     )
 };
 
-export default ItemComponent;
+function mapStateToProps(state) {
+    return {}
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+
+    return {
+        onOrderBook: () => {
+            dispatch(Actions.shoppingCartAddBook(ownProps));
+        }
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ItemComponent));

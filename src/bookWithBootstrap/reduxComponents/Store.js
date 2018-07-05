@@ -6,7 +6,11 @@ const initValues = {
     'searchCount': 1,
     'searchName': 'react',
     'books': [],
-    'book': null
+    'book': null,
+    'shoppingCart': {
+        'totalCount':0,
+        'totalPrice':0
+    }
 };
 
 const store = createStore(reducer, initValues, applyMiddleware(thunk));
