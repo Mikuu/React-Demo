@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import * as Actions from '../../reduxComponents/Actions';
 import {Link} from 'react-router-dom';
 import icons from '../../assets';
-import ModalExample from './ShoppingCartModal';
+import ShoppingCartModal from './ShoppingCartModal';
 
 const storageItem = {
     count: 'reactDemoBookListCount',
@@ -36,10 +36,11 @@ function TopBar(props, context) {
                         <ul className="navbar-nav ml-md-auto">
 
                             <li className="nav-item active" >
-                                <a className="navbar-brand">
+                                <a className="navbar-brand" href="#" onClick={props.onClickShoppingCart}>
                                     <img src={icons.shoppingCartNav} style={{width:"30px", height:"30px"}}/>
                                 </a>
                                 <span className="navbar-brand">{props.shoppingCart.totalCount}</span>
+                                <ShoppingCartModal/>
                             </li>
 
                             <li className="nav-item active">
@@ -80,6 +81,9 @@ function mapDispatchToProps(dispatch) {
         },
         onSubmit: () => {
             dispatch(Actions.fetchBooks());
+        },
+        onClickShoppingCart: () => {
+            dispatch(Actions.toggleShoppingCartModal());
         }
     }
 }

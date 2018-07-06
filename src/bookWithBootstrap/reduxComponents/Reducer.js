@@ -16,6 +16,13 @@ export default (state, action) => {
           newState.shoppingCart.totalCount += action.bookCount;
           newState.shoppingCart.totalPrice += action.bookPrice;
           return newState;
+      case ActionTypes.TOGGLESHOPPINGCARTMODAL:
+          let state1 = {...state};
+          state1.shoppingCart.modal = !state.shoppingCart.modal;
+
+          console.log('FBI --> toggle modal: '+state1.shoppingCart.modal.toString());
+
+          return state1;
       default:
           return state
   }

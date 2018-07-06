@@ -71,3 +71,9 @@ export const shoppingCartAddBook = (book) => {
         bookPrice: parseFloat(book.price.match(/(\d|\.)+/)[0])
     };
 };
+
+export const toggleShoppingCartModal = () => {
+    return {
+        type: ActionTypes.TOGGLESHOPPINGCARTMODAL
+    };
+};

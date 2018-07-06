@@ -9,7 +9,8 @@ const initValues = {
     book: null,
     shoppingCart: {
         totalCount:0,
-        totalPrice:0
+        totalPrice:0,
+        modal: false
     }
 };
 
