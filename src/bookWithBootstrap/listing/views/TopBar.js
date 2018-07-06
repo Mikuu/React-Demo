@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import * as Actions from '../../reduxComponents/Actions';
 import {Link} from 'react-router-dom';
 import icons from '../../assets';
-import ShoppingCartModal from './ShoppingCart';
+import ModalExample from './ShoppingCartModal';
 
 const storageItem = {
     count: 'reactDemoBookListCount',
