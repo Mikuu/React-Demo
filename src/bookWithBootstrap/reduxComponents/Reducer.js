@@ -1,5 +1,18 @@
 import * as ActionTypes from './ActionTypes.js';
 
+function removeBookFromBookList(bookList, bookId) {
+    let bookListCopy = new Array(...bookList);
+
+    // Bug, delete is not working well if there are same books in shoppingCart.
+    bookListCopy.forEach((value, index) => {
+       if (value.bookId == bookId) {
+           bookListCopy.splice(index, 1);
+       }
+    });
+
+    return bookListCopy;
+}
+
 export default (state, action) => {
 
   switch (action.type) {
@@ -15,13 +28,24 @@ export default (state, action) => {
           let newState = {...state};
           newState.shoppingCart.totalCount += action.bookCount;
           newState.shoppingCart.totalPrice += action.bookPrice;
+
+          newState.shoppingCart.books.push({
+              bookId: action.bookId,
+              bookImage: action.bookImage,
+              bookTitle: action.bookTitle,
+              bookPrice: action.bookPrice
+          });
+
           return newState;
+      case ActionTypes.SHOPPINGCARTDELETEBOOK:
+          let state2 = {...state};
+          state2.shoppingCart.totalCount -= action.bookCount;
+          state2.shoppingCart.totalPrice -= action.bookPrice;
+          state2.shoppingCart.books = removeBookFromBookList(state2.shoppingCart.books, action.bookId);
+          return state2;
       case ActionTypes.TOGGLESHOPPINGCARTMODAL:
           let state1 = {...state};
           state1.shoppingCart.modal = !state.shoppingCart.modal;
-
-          console.log('FBI --> toggle modal: '+state1.shoppingCart.modal.toString());
-
           return state1;
       default:
           return state

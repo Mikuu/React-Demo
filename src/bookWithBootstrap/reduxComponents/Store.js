@@ -10,7 +10,8 @@ const initValues = {
     shoppingCart: {
         totalCount:0,
         totalPrice:0,
-        modal: false
+        modal: false,
+        books: []
     }
 };
 

@@ -68,7 +68,20 @@ export const shoppingCartAddBook = (book) => {
     return {
         type: ActionTypes.SHOPPINGCARTADDBOOK,
         bookCount: 1,
-        bookPrice: parseFloat(book.price.match(/(\d|\.)+/)[0])
+        bookPrice: parseFloat(book.price.match(/(\d|\.)+/)[0]),
+        bookId: book.id,
+        bookImage: book.image,
+        bookTitle: book.title
+    };
+};
+
+export const shoppingCartDeleteBook = (bookInShoppingCart) => {
+    console.log('FBI --> bookId in action: '+bookInShoppingCart.bookId);
+    return {
+        type: ActionTypes.SHOPPINGCARTDELETEBOOK,
+        bookId: bookInShoppingCart.bookId,
+        bookPrice: bookInShoppingCart.bookPrice,
+        bookCount: 1
     };
 };
 

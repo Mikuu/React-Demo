@@ -13,14 +13,6 @@ function Books(props) {
 
     return (
         <ol className="list-unstyled">{bookList}</ol>
-
-        // <div className="container-fluid">
-        //     <div className="row">
-        //         <div className="col-md-12">
-        //             <ol className="list-unstyled">{bookList}</ol>
-        //         </div>
-        //     </div>
-        // </div>
     )
 }
 
