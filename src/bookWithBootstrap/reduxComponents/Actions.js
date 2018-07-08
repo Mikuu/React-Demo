@@ -68,7 +68,7 @@ export const shoppingCartAddBook = (book) => {
     return {
         type: ActionTypes.SHOPPINGCARTADDBOOK,
         bookCount: 1,
-        bookPrice: Number(book.price.match(/(\d|\.)+/)[0]),
+        bookPrice: book.price? Number(book.price.match(/(\d|\.)+/)[0]) : 0,
         bookId: book.id,
         bookImage: book.image,
         bookTitle: book.title

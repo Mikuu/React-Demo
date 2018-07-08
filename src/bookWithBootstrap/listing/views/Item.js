@@ -30,7 +30,7 @@ const ItemComponent = (props) => {
 
 function mapStateToProps(state, ownProps) {
     return {
-        price: ownProps.price.match(/(\d|\.)+/)[0]
+        price: ownProps.price? ownProps.price.match(/(\d|\.)+/)[0] : 0
     }
 }
 
