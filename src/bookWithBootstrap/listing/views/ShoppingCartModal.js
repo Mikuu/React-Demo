@@ -11,8 +11,6 @@ const ShoppingCartModal = (props) => {
     };
 
     const TableBookListItems = props.cartBooks.books.map((book) => {
-        console.log('FBI --> in mapping: '+book.bookTitle);
-
         return (
             <tr>
                 <td><img width={'44px'} height={'60px'} src={book.bookImage}/></td>

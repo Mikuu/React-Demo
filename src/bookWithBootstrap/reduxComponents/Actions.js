@@ -76,7 +76,6 @@ export const shoppingCartAddBook = (book) => {
 };
 
 export const shoppingCartDeleteBook = (bookInShoppingCart) => {
-    console.log('FBI --> bookId in action: '+bookInShoppingCart.bookId);
     return {
         type: ActionTypes.SHOPPINGCARTDELETEBOOK,
         bookId: bookInShoppingCart.bookId,
