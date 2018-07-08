@@ -27,7 +27,7 @@ export default (state, action) => {
       case ActionTypes.SHOPPINGCARTADDBOOK:
           let newState = {...state};
           newState.shoppingCart.totalCount += action.bookCount;
-          newState.shoppingCart.totalPrice += action.bookPrice;
+          newState.shoppingCart.totalPrice = Number(parseFloat(newState.shoppingCart.totalPrice+action.bookPrice).toFixed(2));
 
           newState.shoppingCart.books.push({
               bookId: action.bookId,
@@ -40,7 +40,7 @@ export default (state, action) => {
       case ActionTypes.SHOPPINGCARTDELETEBOOK:
           let state2 = {...state};
           state2.shoppingCart.totalCount -= action.bookCount;
-          state2.shoppingCart.totalPrice -= action.bookPrice;
+          state2.shoppingCart.totalPrice = Number(parseFloat(state2.shoppingCart.totalPrice-action.bookPrice).toFixed(2));
           state2.shoppingCart.books = removeBookFromBookList(state2.shoppingCart.books, action.bookId);
           return state2;
       case ActionTypes.TOGGLESHOPPINGCARTMODAL:

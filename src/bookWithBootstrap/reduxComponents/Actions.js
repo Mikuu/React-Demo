@@ -68,7 +68,7 @@ export const shoppingCartAddBook = (book) => {
     return {
         type: ActionTypes.SHOPPINGCARTADDBOOK,
         bookCount: 1,
-        bookPrice: parseFloat(book.price.match(/(\d|\.)+/)[0]),
+        bookPrice: Number(book.price.match(/(\d|\.)+/)[0]),
         bookId: book.id,
         bookImage: book.image,
         bookTitle: book.title
@@ -80,7 +80,7 @@ export const shoppingCartDeleteBook = (bookInShoppingCart) => {
     return {
         type: ActionTypes.SHOPPINGCARTDELETEBOOK,
         bookId: bookInShoppingCart.bookId,
-        bookPrice: bookInShoppingCart.bookPrice,
+        bookPrice: Number(bookInShoppingCart.bookPrice),
         bookCount: 1
     };
 };

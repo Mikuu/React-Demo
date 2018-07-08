@@ -19,7 +19,7 @@ const ItemComponent = (props) => {
                 <h5 className="card-title" style={{width:'220px', height:'30px'}}>{props.title}</h5>
             </div>
             <div className="card-footer">
-                <span className="badge badge-info">{props.price}</span>
+                <span className="badge badge-info">$ {props.price}</span>
                 <a href="#" onClick={props.onOrderBook}>
                     <img className="float-right" src={icons.shoppingCartItem} style={{width:'20px', height:'20px', marginTop: '2.5px'}}/>
                 </a>
@@ -28,8 +28,10 @@ const ItemComponent = (props) => {
     )
 };
 
-function mapStateToProps(state) {
-    return {}
+function mapStateToProps(state, ownProps) {
+    return {
+        price: ownProps.price.match(/(\d|\.)+/)[0]
+    }
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
