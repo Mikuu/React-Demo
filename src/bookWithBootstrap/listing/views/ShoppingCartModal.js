@@ -18,7 +18,7 @@ const ShoppingCartModal = (props) => {
                 <td><img width={'44px'} height={'60px'} src={book.bookImage}/></td>
                 <td style={styleModifier}>{book.bookTitle}</td>
                 <td style={styleModifier}>
-                    <a data-book={JSON.stringify(book)} onClick={props.onDelete}>delete</a>
+                    <a data-book={JSON.stringify(book)} onClick={props.onDelete} style={{color:'cornflowerblue'}}>delete</a>
                 </td>
                 <td style={styleModifier}>{book.bookPrice}</td>
             </tr>
