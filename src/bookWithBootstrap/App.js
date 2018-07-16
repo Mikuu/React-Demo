@@ -1,14 +1,22 @@
 import React from 'react';
-import { Route, Link } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
+import { Breadcrumbs } from 'react-breadcrumbs';
 
 import { TopBar, Books } from './listing/index.js';
 import BookDetailComponent from './detail/index.js';
+import CrumbRoute from './breadcrumbs/crumb-route';
 
 const App = () => (
     <div>
         <TopBar/>
-        <Route path="/books" component={Books} />
-        <Route path="/detail/:bookId" component={BookDetailComponent} />
+        <Breadcrumbs className="demo__crumbs" />
+        <Switch>
+            <CrumbRoute title="books" path="/books" component={Books}/>
+            <CrumbRoute title="detail" path="/detail/:bookId" component={BookDetailComponent} />
+        </Switch>
+
+        {/*<Route path="/books" component={Books} />*/}
+        {/*<Route path="/detail/:bookId" component={BookDetailComponent} />*/}
     </div>
 );
 

@@ -9,11 +9,12 @@ import App from './bookWithBootstrap/App';
 import {Provider} from 'react-redux';
 import store from './bookWithBootstrap/reduxComponents/Store';
 import {BrowserRouter} from 'react-router-dom';
+import CrumbRoute from './bookWithBootstrap/breadcrumbs/crumb-route';
 
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <App/>
+            <CrumbRoute title="Home" path="/" component={App}/>
         </BrowserRouter>
     </Provider>,
     document.getElementById('root')
