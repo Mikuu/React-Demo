@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, Link } from "react-router-dom";
 import { Breadcrumbs } from 'react-breadcrumbs';
-
+import BooksPagination from './pagination/pagination';
 import { TopBar, Books } from './listing/index.js';
 import BookDetailComponent from './detail/index.js';
 import CrumbRoute from './breadcrumbs/crumb-route';
@@ -14,9 +14,7 @@ const App = () => (
             <CrumbRoute title="books" path="/books" component={Books}/>
             <CrumbRoute title="detail" path="/detail/:bookId" component={BookDetailComponent} />
         </Switch>
-
-        {/*<Route path="/books" component={Books} />*/}
-        {/*<Route path="/detail/:bookId" component={BookDetailComponent} />*/}
+        <BooksPagination/>
     </div>
 );
 

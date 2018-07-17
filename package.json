@@ -12,6 +12,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
     "prop-types": "^15.6.2",
+    "rc-pagination": "^1.16.5",
     "react": "^16.4.0",
     "react-bootstrap": "^0.32.1",
     "react-breadcrumbs": "^2.1.6",
