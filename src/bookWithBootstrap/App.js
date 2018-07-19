@@ -14,7 +14,7 @@ const App = () => (
             <CrumbRoute title="books" path="/books" component={Books}/>
             <CrumbRoute title="detail" path="/detail/:bookId" component={BookDetailComponent} />
         </Switch>
-        <BooksPagination/>
+        {/*<BooksPagination/>*/}
     </div>
 );
 

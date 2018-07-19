@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import ItemComponent from './Item.js';
+import BooksPagination from '../../pagination/pagination';
 
 function Books(props) {
 
@@ -12,13 +13,16 @@ function Books(props) {
     );
 
     return (
-        <ol className="list-unstyled">{bookList}</ol>
+        <div>
+            <ol className="list-unstyled">{bookList}</ol>
+            <BooksPagination/>
+        </div>
     )
 }
 
 function mapStateToProps(state) {
     return {
-        books: state.books,
+        books: state.books.slice(state.pageBookBegin, state.pageBookEnd),
     }
 }
 

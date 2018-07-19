@@ -89,3 +89,10 @@ export const toggleShoppingCartModal = () => {
         type: ActionTypes.TOGGLESHOPPINGCARTMODAL
     };
 };
+
+export const selectPage = (pageNumber) => {
+    return {
+        type: ActionTypes.SELECTPAGE,
+        pageNumber: pageNumber
+    }
+};

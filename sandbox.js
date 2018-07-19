@@ -1,7 +1,6 @@
-aa = "23.99889";
-bb = "12";
-rst = parseFloat(bb)+parseInt(aa);
+aa = {a:1,b:2,c:3};
 
-console.log(rst);
-console.log(aa.toFixed(2));
+bb = {...aa, ['a']:11, ['b']:22};
+
+console.log(bb);
 

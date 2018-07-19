@@ -5,6 +5,9 @@ import reducer from './Reducer.js';
 const initValues = {
     searchCount: 1,
     searchName: 'react',
+    pageBookSize: 10,
+    pageBookBegin: 0,
+    pageBookEnd: 10,
     books: [],
     book: null,
     shoppingCart: {

@@ -35,7 +35,6 @@ export default (state, action) => {
               bookTitle: action.bookTitle,
               bookPrice: action.bookPrice
           });
-
           return newState;
       case ActionTypes.SHOPPINGCARTDELETEBOOK:
           let state2 = {...state};
@@ -47,6 +46,12 @@ export default (state, action) => {
           let state1 = {...state};
           state1.shoppingCart.modal = !state.shoppingCart.modal;
           return state1;
+      case ActionTypes.SELECTPAGE:
+          return {
+              ...state,
+              ['pageBookBegin']: state.pageBookSize*(action.pageNumber-1),
+              ['pageBookEnd']: state.pageBookSize+state.pageBookSize*(action.pageNumber-1)
+          };
       default:
           return state
   }
