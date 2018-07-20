@@ -6,16 +6,7 @@ import {Link} from 'react-router-dom';
 import icons from '../../assets';
 import ShoppingCartModal from './ShoppingCartModal';
 
-const storageItem = {
-    count: 'reactDemoBookListCount',
-    bookName: 'reactDemoBookListBookName',
-};
-
 function TopBar(props, context) {
-    if (!props.books) {
-        return <div>T_T</div>;
-    }
-
     return (
         <div className="container-fluid">
             <div className="row">
